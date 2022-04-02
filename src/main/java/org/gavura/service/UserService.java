@@ -26,7 +26,10 @@ public class UserService extends CommonService {
         return super.postRequest(uri.getUri(), body);
     }
 
-    public void deleteRequest(UriTemplate uri, String username) {
-        super.deleteRequest(uri.getUri(username));
+    public Response deleteRequest(UriTemplate uri, String username) {
+        return super.deleteRequest(uri.getUri(username));
+    }
+    public Response updateRequest(UriTemplate uri, String username, Object body) {
+        return super.updateRequest(uri.getUri(username), body);
     }
 }

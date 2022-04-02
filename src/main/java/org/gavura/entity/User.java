@@ -1,9 +1,6 @@
 package org.gavura.entity;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @Getter
@@ -13,6 +10,7 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Long id;
+    @Setter
     private String username;
     private String firstName;
     private String lastName;

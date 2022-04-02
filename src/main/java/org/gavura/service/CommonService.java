@@ -9,6 +9,7 @@ import org.gavura.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 public abstract class CommonService {
@@ -32,21 +33,26 @@ public abstract class CommonService {
     }
 
     protected Response getRequest(String uri) {
-        return requestSpecification.when()
-                .contentType(ContentType.JSON)
-                .get(prepareUri.apply(uri)).then().log().all().and().extract().response();
+        return requestSpecification.expect().statusCode(HttpStatus.SC_OK)
+                .log().all()
+                .when().get(prepareUri.apply(uri));
     }
 
     protected Response postRequest(String uri, Object body) {
         return requestSpecification.body(body)
                 .expect().statusCode(HttpStatus.SC_OK)
-                .log().ifError()
+                .log().all()
                 .when().post(prepareUri.apply(uri));
     }
 
-    protected void deleteRequest(String uri) {
-        requestSpecification.expect().statusCode(HttpStatus.SC_NO_CONTENT)
-                .log().ifError()
+    protected Response deleteRequest(String uri) {
+        return requestSpecification.expect().statusCode(HttpStatus.SC_OK)
+                .log().all()
                 .when().delete(prepareUri.apply(uri));
+    }
+    protected Response updateRequest(String uri, Object body) {
+        return requestSpecification.body(body).expect().statusCode(HttpStatus.SC_OK)
+                .log().all()
+                .when().put(prepareUri.apply(uri));
     }
 }
