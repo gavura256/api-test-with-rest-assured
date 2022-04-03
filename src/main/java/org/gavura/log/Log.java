@@ -17,15 +17,8 @@ public class Log {
         return loggerInstance;
     }
 
-    public static void info(String message) {
+    public static void printLog(String message) {
         getLogger().info(message);
     }
-
-    public static void warn(String message, Throwable cause) {
-        getLogger().warn(message, cause);
-    }
-
-    public static void error(String message) {
-        getLogger().error(message);
-    }
 }
+

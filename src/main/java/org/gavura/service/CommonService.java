@@ -1,15 +1,13 @@
 package org.gavura.service;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
-import org.gavura.entity.User;
+import org.gavura.log.RAFilter;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 public abstract class CommonService {
@@ -20,7 +18,6 @@ public abstract class CommonService {
     protected RequestSpecification requestSpecification;
 
     protected CommonService() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         this.requestSpecification = RestAssured.given();
         setCommonParams();
     }
@@ -33,26 +30,29 @@ public abstract class CommonService {
     }
 
     protected Response getRequest(String uri) {
-        return requestSpecification.expect().statusCode(HttpStatus.SC_OK)
-                .log().all()
+        return requestSpecification
+                .filter(new RAFilter())
+                .expect().statusCode(HttpStatus.SC_OK)
                 .when().get(prepareUri.apply(uri));
     }
 
     protected Response postRequest(String uri, Object body) {
-        return requestSpecification.body(body)
+        return requestSpecification.filter(new RAFilter())
+                .body(body)
                 .expect().statusCode(HttpStatus.SC_OK)
-                .log().all()
                 .when().post(prepareUri.apply(uri));
     }
 
     protected Response deleteRequest(String uri) {
-        return requestSpecification.expect().statusCode(HttpStatus.SC_OK)
-                .log().all()
+        return requestSpecification.filter(new RAFilter())
+                .expect().statusCode(HttpStatus.SC_OK)
                 .when().delete(prepareUri.apply(uri));
     }
+
     protected Response updateRequest(String uri, Object body) {
-        return requestSpecification.body(body).expect().statusCode(HttpStatus.SC_OK)
-                .log().all()
+        return requestSpecification.filter(new RAFilter())
+                .body(body)
+                .expect().statusCode(HttpStatus.SC_OK)
                 .when().put(prepareUri.apply(uri));
     }
 }

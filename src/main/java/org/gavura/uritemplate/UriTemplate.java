@@ -1,4 +1,4 @@
-package org.gavura.service.uritemplate;
+package org.gavura.uritemplate;
 
 public record UriTemplate(String url) {
     public String getUri() {

@@ -1,10 +1,9 @@
 package org.gavura.service;
 
 import io.restassured.response.Response;
-import org.gavura.service.uritemplate.UriTemplate;
+import org.gavura.uritemplate.UriTemplate;
 
 public class UserService extends CommonService {
-
     private static UserService instance;
 
     public static UserService getInstance() {
@@ -12,10 +11,6 @@ public class UserService extends CommonService {
             instance = new UserService();
         }
         return instance;
-    }
-
-    public Response getRequest(UriTemplate uri) {
-        return super.getRequest(uri.getUri());
     }
 
     public Response getRequest(UriTemplate uri, String username) {
@@ -29,6 +24,7 @@ public class UserService extends CommonService {
     public Response deleteRequest(UriTemplate uri, String username) {
         return super.deleteRequest(uri.getUri(username));
     }
+
     public Response updateRequest(UriTemplate uri, String username, Object body) {
         return super.updateRequest(uri.getUri(username), body);
     }
