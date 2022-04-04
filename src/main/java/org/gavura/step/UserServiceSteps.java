@@ -3,7 +3,7 @@ package org.gavura.step;
 import lombok.experimental.UtilityClass;
 import org.gavura.entity.ApiResponse;
 import org.gavura.entity.User;
-import org.gavura.service.Petservice;
+import org.gavura.service.UserService;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static org.gavura.uritemplate.UserServiceUri.USER_BY_USERNAME;
 
 @UtilityClass
 public class UserServiceSteps {
-    private static final Petservice USER_SERVICE = Petservice.getInstance();
+    private static final UserService USER_SERVICE = UserService.getInstance();
 
     public static User getUserByName(String username) {
         return USER_SERVICE.getRequest(USER_BY_USERNAME, username).as(User.class);
