@@ -18,8 +18,7 @@ public abstract class CommonService {
     protected RequestSpecification requestSpecification;
 
     protected CommonService() {
-        this.requestSpecification = RestAssured.given()
-                .filter(new RAFilter());
+        this.requestSpecification = RestAssured.given().filter(new RAFilter());
         setCommonParams();
     }
 

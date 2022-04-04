@@ -15,16 +15,16 @@ import static org.hamcrest.Matchers.*;
 public class UserServiceTest {
 
     @Test
-    public void createUsersTest() {
+    public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
-        User actualUser = UserServiceSteps.getUserByName(expectedUser.getUsername());
+        User createdUser = UserServiceSteps.getUserByName(expectedUser.getUsername());
 
-        assertThat(actualUser, is(equalTo(expectedUser)));
+        assertThat(createdUser, is(equalTo(expectedUser)));
     }
 
     @Test
-    public void deleteUserTest() {
+    public void deleteUserAndVerifyWhetherResponseBodyContainsDeletedUserNameTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         String deletedUserName = UserServiceSteps.deleteUserByUserName(expectedUser.getUsername()).getMessage();
@@ -33,14 +33,14 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUserTest() {
+    public void updateUserAndVerifyTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         User updatedUser = createUser();
-        updatedUser.setUsername(expectedUser.getUsername());
         UserServiceSteps.updateUserByUserName(expectedUser.getUsername(), updatedUser);
+        User userFromDataBase = UserServiceSteps.getUserByName(updatedUser.getUsername());
 
-        assertThat(UserServiceSteps.getUserByName(updatedUser.getUsername()), is(notNullValue()));
+        assertThat(userFromDataBase, is(equalTo(updatedUser)));
     }
 
     @Test
