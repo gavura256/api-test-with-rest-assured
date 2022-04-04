@@ -1,15 +1,22 @@
 package org.gavura.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.util.ArrayList;
+import java.util.List;
 
+@Builder
 @Data
+@ToString
+@EqualsAndHashCode
 public class Pet {
-    private int id;
+    @EqualsAndHashCode.Exclude
+    private Long id;
     private Category category;
     private String name;
-    private ArrayList<String> photoUrls;
-    private ArrayList<Tag> tags;
+    private List<String> photoUrls;
+    private List<Tag> tags;
     private String status;
 }

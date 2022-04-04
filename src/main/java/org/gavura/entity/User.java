@@ -7,7 +7,6 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class User {
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Long id;
     @Setter
