@@ -44,7 +44,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUsersFromListTest() {
+    public void createTenUsersAndVerifyWhetherResponseBodyMessageContainsOk() {
         List<User> list = new ArrayList<>();
         IntStream.range(0, 10).forEach(iteration -> list.add(createUser()));
         String respondForAddingListOfUsers = UserServiceSteps.createUsersWithList(list).getMessage();

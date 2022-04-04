@@ -3,15 +3,13 @@ package org.gavura.log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.filter.Filter;
 import io.restassured.filter.FilterContext;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
-import org.json.JSONObject;
-
-import java.util.stream.IntStream;
 
 public class RAFilter implements Filter {
     private StringBuilder requestBuilderLogs;
@@ -32,7 +30,7 @@ public class RAFilter implements Filter {
                 .append("\nHeaders: ").append(objectValidation(frqSpec.getHeaders()))
                 .append("\nCookies: ").append(objectValidation(frqSpec.getCookies()))
                 .append("\nProxy: ").append(objectValidation(frqSpec.getProxySpecification()))
-                .append("\nBody: ").append(objectValidation(getBody(frqSpec)))
+                .append("\nBody: ").append(toPrettyFormat(frqSpec))
                 .append("\n******************************");
 
         responseBuilderLogs = new StringBuilder()
@@ -44,22 +42,22 @@ public class RAFilter implements Filter {
                 .append("\nResponse Body: \n").append(response.getBody().asPrettyString())
                 .append("\n******************************");
 
-        Log.printLog(getRequestBuilder());
-        Log.printLog(getResponseBuilder());
+        Log.print(getRequestBuilder());
+        Log.print(getResponseBuilder());
 
         return response;
     }
 
-    private String getBody(FilterableRequestSpecification frqSpec) {
+    public static String toPrettyFormat(FilterableRequestSpecification frs) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String bodyWithSquareBrackets = frqSpec.getBody().toString();
+        String body = frs.getBody().toString();
+        JsonElement json = JsonParser.parseString(body);
 
+        if (json instanceof JsonObject) {
+            return gson.toJson(json.getAsJsonObject());
+        }
 
-        String s = JSONObject.stringToValue(bodyWithSquareBrackets).toString();
-        return gson.toJson(s);
-
-
-
+        return gson.toJson(json.getAsJsonArray());
     }
 
     private String getRequestBuilder() {

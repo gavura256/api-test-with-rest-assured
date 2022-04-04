@@ -17,7 +17,7 @@ public class Log {
         return loggerInstance;
     }
 
-    public static void printLog(String message) {
+    public static void print(String message) {
         getLogger().info(message);
     }
 }
