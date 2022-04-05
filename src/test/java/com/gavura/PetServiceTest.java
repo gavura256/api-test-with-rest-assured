@@ -4,7 +4,6 @@ import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
