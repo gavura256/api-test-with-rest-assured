@@ -12,7 +12,7 @@ import java.util.Random;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
-
+import static org.testng.Assert.assertThrows;
 
 public class PetServiceTest {
     @Test
@@ -23,6 +23,14 @@ public class PetServiceTest {
         assertThat(actualPet, is(equalTo(expectedPet)));
     }
 
+    @Test
+    public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist(){
+        Pet expectedPet = createPet();
+        Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
+        PetServiceSteps.deletePetById(actualPetId);
+
+        assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
+    }
 
     private Pet createPet() {
         Random random = new Random();

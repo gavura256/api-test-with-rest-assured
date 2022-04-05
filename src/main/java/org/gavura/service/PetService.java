@@ -13,11 +13,15 @@ public class PetService extends CommonService {
         return instance;
     }
 
-    public Response getRequest(UriTemplate uri, int id) {
-        return super.getRequest(uri.getUri(id));
+    public Response getRequest(UriTemplate uri, long petId) {
+        return super.getRequest(uri.getUri(petId));
     }
 
     public Response postRequest(UriTemplate uri, Object body) {
         return super.postRequest(uri.getUri(), body);
+    }
+
+    public Response deleteRequest(UriTemplate uri, long petId) {
+        return super.deleteRequest(uri.getUri(petId));
     }
 }
