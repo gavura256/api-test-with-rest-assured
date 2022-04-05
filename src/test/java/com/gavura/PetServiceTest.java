@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 
 public class PetServiceTest {
     @Test
-    public void createPetTest() {
+    public void createPetAndVerifyWhetherCreatedPetIsTheSameAsExpectedTest() {
         Pet expectedPet = createPet();
         Pet actualPet = PetServiceSteps.createPet(expectedPet);
 
@@ -26,10 +26,11 @@ public class PetServiceTest {
 
     private Pet createPet() {
         Random random = new Random();
-        return Pet.builder().category(new Category())
+        return Pet.builder().category(new Category(0, "available"))
                 .name("categoryName" + random.nextInt())
                 .photoUrls(List.of("photoUrl" + random.nextInt()))
-                .tags(List.of(new Tag())).status("statusPet")
+                .tags(List.of(new Tag(0, "tag" + random.nextInt())))
+                .status("statusPet" + random.nextInt())
                 .build();
     }
 }
