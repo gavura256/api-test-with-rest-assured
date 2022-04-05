@@ -13,7 +13,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class UserServiceTest {
-
     @Test
     public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
         User expectedUser = createUser();

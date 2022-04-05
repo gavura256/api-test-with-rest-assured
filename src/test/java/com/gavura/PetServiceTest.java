@@ -4,6 +4,7 @@ import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class PetServiceTest {
     }
 
     @Test
-    public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist(){
+    public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
         PetServiceSteps.deletePetById(actualPetId);
@@ -32,12 +33,21 @@ public class PetServiceTest {
         assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
     }
 
+    @Test
+    public void getPetByIdTest() {
+        Pet expectedPet = createPet();
+        Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
+        Pet actualPet = PetServiceSteps.getPetById(actualPetId);
+
+        assertThat(actualPet, is(equalTo(expectedPet)));
+    }
+
     private Pet createPet() {
         Random random = new Random();
-        return Pet.builder().category(new Category(0, "available"))
+        return Pet.builder().category(new Category(0L, "available"))
                 .name("categoryName" + random.nextInt())
                 .photoUrls(List.of("photoUrl" + random.nextInt()))
-                .tags(List.of(new Tag(0, "tag" + random.nextInt())))
+                .tags(List.of(new Tag(0L, "tag" + random.nextInt())))
                 .status("statusPet" + random.nextInt())
                 .build();
     }

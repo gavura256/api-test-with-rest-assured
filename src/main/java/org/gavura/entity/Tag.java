@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 public class Tag {
-    private int id;
+    private Long id;
     @EqualsAndHashCode.Include
     private String name;
 }

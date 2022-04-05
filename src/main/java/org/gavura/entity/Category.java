@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @AllArgsConstructor
 public class Category {
-    private Integer id;
+    private Long id;
     @EqualsAndHashCode.Include
     private String name;
 }
