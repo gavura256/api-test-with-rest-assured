@@ -9,7 +9,6 @@ import lombok.*;
 public class User {
     @EqualsAndHashCode.Exclude
     private Long id;
-    @Setter
     private String username;
     private String firstName;
     private String lastName;
