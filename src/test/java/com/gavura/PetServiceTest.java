@@ -28,9 +28,10 @@ public class PetServiceTest {
     public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
-        PetServiceSteps.deletePetById(actualPetId);
+        String responseMessage = PetServiceSteps.deletePetById(actualPetId).getMessage();
 
         assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
+        assertThat(responseMessage, is(equalTo(String.valueOf(actualPetId))));
     }
 
     @Test
