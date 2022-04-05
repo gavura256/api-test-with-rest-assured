@@ -1,9 +1,11 @@
 package com.gavura;
 
+import io.restassured.RestAssured;
 import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
+import org.gavura.utility.ReadApplicationProperties;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -49,6 +51,18 @@ public class PetServiceTest {
         Pet updatedPet = PetServiceSteps.updatePet(expectedPet);
 
         assertThat(expectedPet, is(equalTo(updatedPet)));
+    }
+
+    @Test
+    public void findPetByStatus(){
+
+//        List<Pet> list = RestAssured.given().queryParam("status", "available").
+//                when().
+//                get(ReadApplicationProperties.readBaseUrl() + "pet/findByStatus").
+//                getBody().jsonPath().getList(".", Pet.class);
+
+        List<Pet> available = PetServiceSteps.getPetsByStatus("available");
+        int i = 0;
     }
 
     private Pet createPet() {

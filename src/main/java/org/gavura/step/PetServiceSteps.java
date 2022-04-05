@@ -5,8 +5,12 @@ import org.gavura.entity.ApiResponse;
 import org.gavura.entity.Pet;
 import org.gavura.service.PetService;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 import static org.gavura.uritemplate.PetServiceUri.PET;
 import static org.gavura.uritemplate.PetServiceUri.PET_BY_ID;
+import static org.gavura.uritemplate.PetServiceUri.PET_FIND_BY_STATUS;
 
 @UtilityClass
 public class PetServiceSteps {
@@ -26,5 +30,10 @@ public class PetServiceSteps {
 
     public static Pet updatePet(Pet pet) {
         return PET_SERVICE.updateRequest(PET, pet).as(Pet.class);
+    }
+
+    public static List<Pet> getPetsByStatus(String status) {
+        return PET_SERVICE.getRequest(PET_FIND_BY_STATUS, status).
+        getBody().jsonPath().getList(".", Pet.class);
     }
 }
