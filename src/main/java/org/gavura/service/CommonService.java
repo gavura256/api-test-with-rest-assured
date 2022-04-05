@@ -27,7 +27,7 @@ public abstract class CommonService {
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json");
-        headers.put("api_key", "api_key");
+        headers.put("api_key", ReadApplicationProperties.readApiKey());
         requestSpecification.headers(headers);
     }
 

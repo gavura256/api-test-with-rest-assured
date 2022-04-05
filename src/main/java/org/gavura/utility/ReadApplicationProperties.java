@@ -14,7 +14,15 @@ public class ReadApplicationProperties {
     @SneakyThrows
     public static String readBaseUrl() {
         readProperties();
+
         return System.getProperty("url");
+    }
+
+    @SneakyThrows
+    public static String readApiKey(){
+        readProperties();
+
+        return System.getProperty("api_key");
     }
 
 }
