@@ -42,6 +42,15 @@ public class PetServiceTest {
         assertThat(actualPet, is(equalTo(expectedPet)));
     }
 
+    @Test
+    public void updatePetAndVerifyWhetherRequestReturnValidUpdatedPet() {
+        Pet expectedPet = createPet();
+        PetServiceSteps.createPet(expectedPet);
+        Pet updatedPet = PetServiceSteps.updatePet(expectedPet);
+
+        assertThat(expectedPet, is(equalTo(updatedPet)));
+    }
+
     private Pet createPet() {
         Random random = new Random();
         return Pet.builder().category(new Category(0L, "available"))
