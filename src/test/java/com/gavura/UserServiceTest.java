@@ -33,7 +33,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUserAndVerifyTest() {
+    public void updateUserAndVerifyWhetherUpdatedUserIsAsExpectedTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         User updatedUser = createUser();
