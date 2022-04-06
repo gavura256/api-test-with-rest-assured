@@ -1,11 +1,9 @@
 package com.gavura;
 
-import io.restassured.RestAssured;
 import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
-import org.gavura.utility.ReadApplicationProperties;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -13,9 +11,9 @@ import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
-import static org.testng.Assert.assertTrue;
 
 
 public class PetServiceTest {
@@ -56,18 +54,14 @@ public class PetServiceTest {
     }
 
     @Test
-    public void findPetByStatus(){
-
-//        List<Pet> list = RestAssured.given().queryParam("expectedStatus", "available").
-//                when().
-//                get(ReadApplicationProperties.readBaseUrl() + "pet/findByStatus").
-//                getBody().jsonPath().getList(".", Pet.class);
-
+    public void findPetByStatus() {
         String expectedStatus = "available";
-        List<Pet> actualPets = PetServiceSteps.getPetsByStatus(expectedStatus);
+        List<String> actualStatuses = PetServiceSteps.getPetsByStatus(expectedStatus)
+                .stream()
+                .map(Pet::getStatus)
+                .toList();
 
-        assertTrue(actualPets.stream()
-                .allMatch(pet -> pet.getStatus().equals(expectedStatus)));
+        assertThat(actualStatuses, everyItem(is(equalTo(expectedStatus))));
     }
 
     private Pet createPet() {
