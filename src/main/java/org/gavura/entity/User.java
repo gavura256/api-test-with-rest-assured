@@ -7,10 +7,8 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class User {
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Long id;
-    @Setter
     private String username;
     private String firstName;
     private String lastName;

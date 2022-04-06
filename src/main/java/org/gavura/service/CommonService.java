@@ -5,21 +5,21 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.gavura.log.RAFilter;
+import org.gavura.utility.ReadApplicationProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 
 public abstract class CommonService {
-    private static final String BASE_URI = "https://petstore.swagger.io/v2/";
+    private static final String BASE_URI = ReadApplicationProperties.readBaseUrl();
 
     private final UnaryOperator<String> prepareUri = uri -> String.format("%s%s", BASE_URI, uri);
 
     protected RequestSpecification requestSpecification;
 
     protected CommonService() {
-        this.requestSpecification = RestAssured.given()
-                .filter(new RAFilter());
+        this.requestSpecification = RestAssured.given().filter(new RAFilter());
         setCommonParams();
     }
 
@@ -27,6 +27,7 @@ public abstract class CommonService {
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "application/json");
         headers.put("Content-Type", "application/json");
+        headers.put("api_key", ReadApplicationProperties.readApiKey());
         requestSpecification.headers(headers);
     }
 
