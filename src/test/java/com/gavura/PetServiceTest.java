@@ -15,6 +15,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
+import static org.testng.Assert.assertTrue;
+
 
 public class PetServiceTest {
     @Test
@@ -56,13 +58,16 @@ public class PetServiceTest {
     @Test
     public void findPetByStatus(){
 
-//        List<Pet> list = RestAssured.given().queryParam("status", "available").
+//        List<Pet> list = RestAssured.given().queryParam("expectedStatus", "available").
 //                when().
 //                get(ReadApplicationProperties.readBaseUrl() + "pet/findByStatus").
 //                getBody().jsonPath().getList(".", Pet.class);
 
-        List<Pet> available = PetServiceSteps.getPetsByStatus("available");
-        int i = 0;
+        String expectedStatus = "available";
+        List<Pet> actualPets = PetServiceSteps.getPetsByStatus(expectedStatus);
+
+        assertTrue(actualPets.stream()
+                .allMatch(pet -> pet.getStatus().equals(expectedStatus)));
     }
 
     private Pet createPet() {

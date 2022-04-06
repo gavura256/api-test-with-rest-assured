@@ -49,8 +49,15 @@ public class RAFilter implements Filter {
     }
 
     public static String toPrettyFormat(FilterableRequestSpecification frs) {
+        final String body;
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String body = frs.getBody().toString();
+
+        if (frs.getBody() != null) {
+            body = frs.getBody().toString();
+
+        } else {
+            body = "{}";
+        }
         JsonElement json = JsonParser.parseString(body);
 
         if (json instanceof JsonObject) {
