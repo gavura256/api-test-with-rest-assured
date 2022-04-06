@@ -29,7 +29,7 @@ public class PetServiceTest {
     public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
-        String responseMessage = PetServiceSteps.deletePetById(actualPetId).getMessage();
+        PetServiceSteps.deletePetById(actualPetId);
 
         assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
     }
