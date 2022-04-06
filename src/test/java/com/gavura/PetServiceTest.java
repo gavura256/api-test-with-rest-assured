@@ -31,7 +31,6 @@ public class PetServiceTest {
         Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
         String responseMessage = PetServiceSteps.deletePetById(actualPetId).getMessage();
 
-        assertThat(responseMessage, is(equalTo(String.valueOf(actualPetId))));
         assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
     }
 
