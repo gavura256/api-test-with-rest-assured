@@ -14,6 +14,7 @@ public class Log {
         if (Objects.isNull(loggerInstance)) {
             loggerInstance = LoggerFactory.getLogger("Test logger");
         }
+
         return loggerInstance;
     }
 
