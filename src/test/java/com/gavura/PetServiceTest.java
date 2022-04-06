@@ -36,7 +36,7 @@ public class PetServiceTest {
     }
 
     @Test
-    public void getPetByIdTest() {
+    public void getPetByIdAndVerifyWhetherActualPetEqualsToExpectedPetTest() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
         Pet actualPet = PetServiceSteps.getPetById(actualPetId);
@@ -54,7 +54,7 @@ public class PetServiceTest {
     }
 
     @Test
-    public void findPetByStatus() {
+    public void verifyThatFindPetByStatusRequestReturnsOnlyPetsWithExpectedStatusTest() {
         String expectedStatus = "available";
         List<String> actualStatuses = PetServiceSteps.getPetsByStatus(expectedStatus)
                 .stream()
