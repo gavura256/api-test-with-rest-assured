@@ -12,22 +12,26 @@ import java.util.Map;
 import java.util.function.UnaryOperator;
 
 public abstract class CommonService {
-    private static final String BASE_URI = ReadApplicationProperties.readBaseUrl();
+    public static final String ACCEPT_KEY = "Accept";
+    public static final String CONTENT_TYPE_KEY = "Content-Type";
+    public static final String APPLICATION_JSON_VALUE = "application/json";
+    public static final String API_KEY = "api_key";
 
-    private final UnaryOperator<String> prepareUri = uri -> String.format("%s%s", BASE_URI, uri);
+    private final UnaryOperator<String> prepareUri = uri -> String.format("%s", uri);
 
     protected RequestSpecification requestSpecification;
 
     protected CommonService() {
+        RestAssured.baseURI = ReadApplicationProperties.readBaseUrl();
         this.requestSpecification = RestAssured.given().filter(new RAFilter());
         setCommonParams();
     }
 
     protected void setCommonParams() {
         Map<String, String> headers = new HashMap<>();
-        headers.put("Accept", "application/json");
-        headers.put("Content-Type", "application/json");
-        headers.put("api_key", ReadApplicationProperties.readApiKey());
+        headers.put(ACCEPT_KEY, APPLICATION_JSON_VALUE);
+        headers.put(CONTENT_TYPE_KEY, APPLICATION_JSON_VALUE);
+        headers.put(API_KEY, ReadApplicationProperties.readApiKey());
         requestSpecification.headers(headers);
     }
 
