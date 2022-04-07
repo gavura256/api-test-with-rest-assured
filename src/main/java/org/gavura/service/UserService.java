@@ -10,6 +10,7 @@ public class UserService extends CommonService {
         if (instance == null) {
             instance = new UserService();
         }
+
         return instance;
     }
 

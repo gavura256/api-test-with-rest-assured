@@ -16,6 +16,7 @@ public class PetService extends CommonService {
         if (instance == null) {
             instance = new PetService();
         }
+
         return instance;
     }
 
