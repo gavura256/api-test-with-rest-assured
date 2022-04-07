@@ -3,8 +3,13 @@ package org.gavura.service;
 import io.restassured.response.Response;
 import org.gavura.uritemplate.UriTemplate;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 public class PetService extends CommonService {
     public static final String QUERY_PARAMETER_KEY_STATUS = "status";
+    public static final String MULTIPART_FORM_DATA_VALUE = "multipart/form-data";
     private static PetService instance;
 
     public static PetService getInstance() {
@@ -34,5 +39,14 @@ public class PetService extends CommonService {
 
     public Response updateRequest(UriTemplate uri, Object body) {
         return super.updateRequest(uri.getUri(), body);
+    }
+
+    public Response postRequest(UriTemplate uri, long petId, File imageToUpload) {
+        Map<String, String> headers = new HashMap<>();
+        headers.put(CONTENT_TYPE_KEY, MULTIPART_FORM_DATA_VALUE);
+        requestSpecification.headers(headers)
+                .multiPart(imageToUpload);
+
+        return super.postRequest(uri.getUri(petId));
     }
 }

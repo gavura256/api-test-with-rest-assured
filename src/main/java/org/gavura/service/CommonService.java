@@ -50,6 +50,13 @@ public abstract class CommonService {
                 .post(prepareUri.apply(uri));
     }
 
+    protected Response postRequest(String uri) {
+        return requestSpecification.expect()
+                .statusCode(HttpStatus.SC_OK)
+                .when()
+                .post(prepareUri.apply(uri));
+    }
+
     protected Response updateRequest(String uri, Object body) {
         return requestSpecification.body(body)
                 .expect()

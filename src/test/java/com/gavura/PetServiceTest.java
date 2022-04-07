@@ -6,6 +6,7 @@ import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 
@@ -13,10 +14,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.everyItem;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
 
 public class PetServiceTest {
+    public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
+
     @Test
     public void createPetAndVerifyWhetherCreatedPetIsTheSameAsExpectedTest() {
         Pet expectedPet = createPet();
@@ -61,6 +65,17 @@ public class PetServiceTest {
                 .toList();
 
         assertThat(actualStatuses, everyItem(is(equalTo(expectedStatus))));
+    }
+
+    @Test
+    public void uploadPetImageAndVerifyThatResponseMessageDoesNotContainExceptionTextTest() {
+        File imageToUpload = new File("src/test/resources/dogimage.jpg");
+        Pet expectedPet = createPet();
+        Long petId = PetServiceSteps.createPet(expectedPet).getId();
+        String messageResponse = PetServiceSteps.uploadImage(petId, imageToUpload)
+                .getMessage();
+
+        assertThat(messageResponse, is(not(equalTo(EXCEPTION_MISSING_START_BOUNDARY))));
     }
 
     private Pet createPet() {
