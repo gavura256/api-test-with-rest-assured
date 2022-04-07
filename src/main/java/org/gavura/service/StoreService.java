@@ -1,5 +1,8 @@
 package org.gavura.service;
 
+import io.restassured.response.Response;
+import org.gavura.uritemplate.UriTemplate;
+
 public class StoreService extends CommonService {
     private static StoreService instance;
 
@@ -9,5 +12,9 @@ public class StoreService extends CommonService {
         }
 
         return instance;
+    }
+
+    public Response getRequest(UriTemplate uri) {
+        return super.getRequest(uri.getUri());
     }
 }
