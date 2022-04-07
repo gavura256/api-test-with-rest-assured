@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 import org.gavura.uritemplate.UriTemplate;
 
 public class PetService extends CommonService {
+    public static final String QUERY_PARAMETER_KEY_STATUS = "status";
     private static PetService instance;
 
     public static PetService getInstance() {
@@ -18,7 +19,7 @@ public class PetService extends CommonService {
     }
 
     public Response getRequest(UriTemplate uri, String status) {
-        requestSpecification.queryParam("status", status);
+        requestSpecification.queryParam(QUERY_PARAMETER_KEY_STATUS, status);
 
         return super.getRequest(uri.getUri());
     }
