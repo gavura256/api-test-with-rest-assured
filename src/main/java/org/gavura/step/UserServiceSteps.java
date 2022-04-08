@@ -32,7 +32,7 @@ public class UserServiceSteps {
         return USER_SERVICE.deleteRequest(USER_BY_USERNAME, username).as(ApiResponse.class);
     }
 
-    public static ApiResponse updateUserByUserName(String username, User user) {
-        return USER_SERVICE.updateRequest(USER_BY_USERNAME, username, user).as(ApiResponse.class);
+    public static void updateUserByUserName(String username, User user) {
+        USER_SERVICE.updateRequest(USER_BY_USERNAME, username, user).as(ApiResponse.class);
     }
 }

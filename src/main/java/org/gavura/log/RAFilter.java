@@ -44,8 +44,8 @@ public class RAFilter implements Filter {
         return response;
     }
 
-    public static String toPrettyFormat(FilterableRequestSpecification frs) {
-        return new Prettifier().getPrettifiedBodyIfPossible(frs);
+    public static String toPrettyFormat(FilterableRequestSpecification filterableRequestSpecification) {
+        return new Prettifier().getPrettifiedBodyIfPossible(filterableRequestSpecification);
     }
 
     private String getRequestBuilder() {
