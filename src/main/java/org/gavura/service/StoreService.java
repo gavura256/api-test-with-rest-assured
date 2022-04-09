@@ -17,4 +17,8 @@ public class StoreService extends CommonService {
     public Response getRequest(UriTemplate uri) {
         return super.getRequest(uri.getUri());
     }
+
+    public Response postRequest(UriTemplate uri, Object body) {
+        return super.postRequest(uri.getUri(), body);
+    }
 }

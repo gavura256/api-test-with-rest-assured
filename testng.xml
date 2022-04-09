@@ -3,9 +3,9 @@
 <suite name="Default Suite">
     <test thread-count="5" name="api-test-with-rest-assured">
         <classes>
-            <class name="com.gavura.UserServiceTest"/>
-            <class name="com.gavura.PetServiceTest"/>
-            <class name="com.gavura.StoreServiceTest"/>
+            <class name="com.gavura.apitests.UserServiceTest"/>
+            <class name="com.gavura.apitests.PetServiceTest"/>
+            <class name="com.gavura.apitests.StoreServiceTest"/>
         </classes>
     </test> <!-- api-test-with-rest-assured -->
 </suite> <!-- Default Suite -->
