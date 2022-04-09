@@ -23,7 +23,8 @@ public abstract class CommonService {
 
     protected CommonService() {
         RestAssured.baseURI = ReadApplicationProperties.readBaseUrl();
-        this.requestSpecification = RestAssured.given().filter(new RAFilter());
+        this.requestSpecification = RestAssured.given()
+                .filter(new RAFilter());
         setCommonParams();
     }
 

@@ -57,9 +57,10 @@ public class RAFilter implements Filter {
     }
 
     public String objectValidation(Object o) {
-        if (o == null)
+        if (o == null) {
             return null;
-        else
+        } else {
             return o.toString();
+        }
     }
 }

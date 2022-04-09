@@ -10,7 +10,9 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsStringIgnoringCase;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class UserServiceTest {
     @Test
@@ -26,7 +28,8 @@ public class UserServiceTest {
     public void deleteUserAndVerifyWhetherResponseBodyContainsDeletedUserNameTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
-        String deletedUserName = UserServiceSteps.deleteUserByUserName(expectedUser.getUsername()).getMessage();
+        String deletedUserName = UserServiceSteps.deleteUserByUserName(expectedUser.getUsername())
+                .getMessage();
 
         assertThat(deletedUserName, is(equalTo(expectedUser.getUsername())));
     }
@@ -46,7 +49,8 @@ public class UserServiceTest {
     public void createTenUsersAndVerifyWhetherResponseBodyMessageContainsOk() {
         List<User> list = new ArrayList<>();
         IntStream.range(0, 10).forEach(iteration -> list.add(createUser()));
-        String respondForAddingListOfUsers = UserServiceSteps.createUsersWithList(list).getMessage();
+        String respondForAddingListOfUsers = UserServiceSteps.createUsersWithList(list)
+                .getMessage();
 
         assertThat(respondForAddingListOfUsers, is(containsStringIgnoringCase("ok")));
     }

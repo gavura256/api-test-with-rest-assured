@@ -22,4 +22,3 @@ public class Log {
         getLogger().info(message);
     }
 }
-

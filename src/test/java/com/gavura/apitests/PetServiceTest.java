@@ -20,6 +20,7 @@ import static org.testng.Assert.assertThrows;
 
 public class PetServiceTest {
     public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
+    public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
 
     @Test
     public void createPetAndVerifyWhetherCreatedPetIsTheSameAsExpectedTest() {
@@ -32,7 +33,8 @@ public class PetServiceTest {
     @Test
     public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist() {
         Pet expectedPet = createPet();
-        Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
+        Long actualPetId = PetServiceSteps.createPet(expectedPet)
+                .getId();
         PetServiceSteps.deletePetById(actualPetId);
 
         assertThrows(() -> PetServiceSteps.getPetById(actualPetId));
@@ -41,7 +43,8 @@ public class PetServiceTest {
     @Test
     public void getPetByIdAndVerifyWhetherActualPetEqualsToExpectedPetTest() {
         Pet expectedPet = createPet();
-        Long actualPetId = PetServiceSteps.createPet(expectedPet).getId();
+        Long actualPetId = PetServiceSteps.createPet(expectedPet)
+                .getId();
         Pet actualPet = PetServiceSteps.getPetById(actualPetId);
 
         assertThat(actualPet, is(equalTo(expectedPet)));
@@ -69,9 +72,10 @@ public class PetServiceTest {
 
     @Test
     public void uploadPetImageAndVerifyThatResponseMessageDoesNotContainExceptionTextTest() {
-        File imageToUpload = new File("src/test/resources/dogimage.jpg");
+        File imageToUpload = new File(DOG_IMAGE_PATH);
         Pet expectedPet = createPet();
-        Long petId = PetServiceSteps.createPet(expectedPet).getId();
+        Long petId = PetServiceSteps.createPet(expectedPet)
+                .getId();
         String messageResponse = PetServiceSteps.uploadImage(petId, imageToUpload)
                 .getMessage();
 

@@ -24,5 +24,4 @@ public class ReadApplicationProperties {
 
         return System.getProperty("api_key");
     }
-
 }
