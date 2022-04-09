@@ -17,7 +17,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
-
 public class PetServiceTest {
     public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
