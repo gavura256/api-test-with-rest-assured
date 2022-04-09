@@ -15,7 +15,11 @@
       "type": "string"
     },
     "status": {
-      "type": "string"
+      "enum": [
+        "placed",
+        "approved",
+        "delivered"
+      ]
     },
     "complete": {
       "type": "boolean"
