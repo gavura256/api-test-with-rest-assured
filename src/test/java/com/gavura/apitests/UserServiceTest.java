@@ -1,4 +1,4 @@
-package com.gavura;
+package com.gavura.apitests;
 
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;

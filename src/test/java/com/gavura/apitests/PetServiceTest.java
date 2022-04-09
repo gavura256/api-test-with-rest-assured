@@ -1,4 +1,4 @@
-package com.gavura;
+package com.gavura.apitests;
 
 import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
