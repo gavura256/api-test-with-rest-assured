@@ -4,8 +4,6 @@ import io.restassured.response.Response;
 import org.gavura.uritemplate.UriTemplate;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PetService extends CommonService {
     public static final String QUERY_PARAMETER_KEY_STATUS = "status";
@@ -43,9 +41,7 @@ public class PetService extends CommonService {
     }
 
     public Response postRequest(UriTemplate uri, long petId, File imageToUpload) {
-        Map<String, String> headers = new HashMap<>();
-        headers.put(CONTENT_TYPE_KEY, MULTIPART_FORM_DATA_VALUE);
-        requestSpecification.headers(headers)
+        requestSpecification.headers(CONTENT_TYPE_KEY, MULTIPART_FORM_DATA_VALUE)
                 .multiPart(imageToUpload);
 
         return super.postRequest(uri.getUri(petId));
