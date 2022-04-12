@@ -27,9 +27,8 @@ public class PetServiceSteps {
                 .as(Pet.class);
     }
 
-    public static ApiResponse deletePetById(long petId) {
-        return PET_SERVICE.deleteRequest(PET_BY_ID, petId)
-                .as(ApiResponse.class);
+    public static void deletePetById(long petId) {
+         PET_SERVICE.deleteRequest(PET_BY_ID, petId);
     }
 
     public static Pet updatePet(Pet pet) {

@@ -1,7 +1,9 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Feature;
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import static org.hamcrest.Matchers.containsStringIgnoringCase;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
+@Listeners
+@Feature("User service API test")
 public class UserServiceTest {
     @Test
     public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
@@ -46,7 +50,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUsersWithListAndVerifyWhetherResponseBodyMessageContainsOk() {
+    public void createUsersWithListAndVerifyWhetherResponseBodyMessageContainsOkTest() {
         List<User> list = new ArrayList<>();
         IntStream.range(0, 10).forEach(iteration -> list.add(createUser()));
         String respondForAddingListOfUsers = UserServiceSteps.createUsersWithList(list)

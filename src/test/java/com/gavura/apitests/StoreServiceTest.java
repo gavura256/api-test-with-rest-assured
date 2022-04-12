@@ -1,8 +1,10 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Feature;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -13,6 +15,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
+@Listeners
+@Feature("Store service API test")
 public class StoreServiceTest {
     private static final String INVENTORY_SCHEMA_JSON = "src/test/resources/inventorySchema.json";
     private static final String STORE_ORDER_SCHEMA = "src/test/resources/storeOrderSchema.json";
@@ -45,7 +49,7 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void deletePurchaseOrderByIdAndVerifyThatAfterDeletingOrderDoesNotExist() {
+    public void deletePurchaseOrderByIdAndVerifyThatAfterDeletingOrderDoesNotExistTest() {
         Store expectedStore = createStore();
         StoreServiceSteps.postStore(expectedStore);
         StoreServiceSteps.deleteStoreById(expectedStore.getId());

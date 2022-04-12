@@ -1,9 +1,11 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Feature;
 import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -17,6 +19,8 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
+@Listeners
+@Feature("Pet service API test")
 public class PetServiceTest {
     public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
@@ -30,7 +34,7 @@ public class PetServiceTest {
     }
 
     @Test
-    public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExist() {
+    public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExistTest() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet)
                 .getId();
@@ -50,7 +54,7 @@ public class PetServiceTest {
     }
 
     @Test
-    public void updatePetAndVerifyWhetherRequestReturnValidUpdatedPet() {
+    public void updatePetAndVerifyWhetherRequestReturnValidUpdatedPetTest() {
         Pet expectedPet = createPet();
         PetServiceSteps.createPet(expectedPet);
         Pet updatedPet = PetServiceSteps.updatePet(expectedPet);
