@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Smoke Tests">
-    <test parallel="classes" thread-count="3" name="api-test-with-rest-assured">
+    <test name="api-test-with-rest-assured">
         <classes>
             <class name="com.gavura.apitests.UserServiceTest"/>
             <class name="com.gavura.apitests.PetServiceTest"/>
