@@ -1,5 +1,6 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;
@@ -17,6 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @Listeners
+@Epic("REST API Regression Testing using TestNG")
 @Feature("User service API test")
 public class UserServiceTest {
     @Test

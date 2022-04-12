@@ -1,5 +1,6 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
@@ -16,6 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
 @Listeners
+@Epic("REST API Regression Testing using TestNG")
 @Feature("Store service API test")
 public class StoreServiceTest {
     private static final String INVENTORY_SCHEMA_JSON = "src/test/resources/inventorySchema.json";

@@ -1,5 +1,6 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
@@ -20,6 +21,7 @@ import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
 @Listeners
+@Epic("REST API Regression Testing using TestNG")
 @Feature("Pet service API test")
 public class PetServiceTest {
     public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
