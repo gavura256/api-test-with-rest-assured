@@ -1,5 +1,6 @@
 package org.gavura.service;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -24,7 +25,8 @@ public abstract class CommonService {
     protected CommonService() {
         RestAssured.baseURI = ReadApplicationProperties.readBaseUrl();
         this.requestSpecification = RestAssured.given()
-                .filter(new RAFilter());
+                .filter(new RAFilter())
+                .filter(new AllureRestAssured());
         setCommonParams();
     }
 

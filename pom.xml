@@ -19,7 +19,7 @@
         <lombok.version>1.18.22</lombok.version>
         <slf4j.version>2.0.0-alpha7</slf4j.version>
         <jackson-databind.version>2.13.2.2</jackson-databind.version>
-        <allure-testng.version>2.17.3</allure-testng.version>
+        <allure.version>2.17.3</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-maven.reportVersion>2.17.3</allure-maven.reportVersion>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
@@ -71,13 +71,19 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>${allure-testng.version}</version>
+            <version>${allure.version}</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-java-commons</artifactId>
-            <version>${allure-testng.version}</version>
+            <version>${allure.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
