@@ -5,7 +5,6 @@ import io.qameta.allure.Feature;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -16,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
-@Listeners
 @Epic("REST API Regression Testing using TestNG")
 @Feature("Store service API test")
 public class StoreServiceTest {

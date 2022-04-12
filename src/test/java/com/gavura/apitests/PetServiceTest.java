@@ -6,7 +6,6 @@ import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
 import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -20,7 +19,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
-@Listeners
 @Epic("REST API Regression Testing using TestNG")
 @Feature("Pet service API test")
 public class PetServiceTest {
