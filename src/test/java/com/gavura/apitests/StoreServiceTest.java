@@ -8,9 +8,9 @@ import org.gavura.utility.ConvertHelper;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.Date;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
+import static org.gavura.utility.ObjectsCreator.createStore;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
@@ -55,16 +55,5 @@ public class StoreServiceTest {
         StoreServiceSteps.deleteStoreById(expectedStore.getId());
 
         assertThrows(() -> StoreServiceSteps.getOrderById(expectedStore.getId()));
-    }
-
-    private Store createStore() {
-        return Store.builder()
-                .id(1L)
-                .petId(0L)
-                .quantity(0)
-                .shipDate(new Date())
-                .status("placed")
-                .complete(true)
-                .build();
     }
 }

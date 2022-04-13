@@ -2,16 +2,14 @@ package com.gavura.apitests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.gavura.entity.Category;
 import org.gavura.entity.Pet;
-import org.gavura.entity.Tag;
 import org.gavura.step.PetServiceSteps;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.List;
-import java.util.Random;
 
+import static org.gavura.utility.ObjectsCreator.createPet;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.everyItem;
@@ -83,15 +81,5 @@ public class PetServiceTest {
                 .getMessage();
 
         assertThat(messageResponse, is(not(equalTo(EXCEPTION_MISSING_START_BOUNDARY))));
-    }
-
-    private Pet createPet() {
-        Random random = new Random();
-        return Pet.builder().category(new Category(0L, "available"))
-                .name("categoryName" + random.nextInt())
-                .photoUrls(List.of("photoUrl" + random.nextInt()))
-                .tags(List.of(new Tag(0L, "tag" + random.nextInt())))
-                .status("statusPet" + random.nextInt())
-                .build();
     }
 }

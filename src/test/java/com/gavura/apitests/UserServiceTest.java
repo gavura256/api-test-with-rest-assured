@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
+import static org.gavura.utility.ObjectsCreator.createUser;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsStringIgnoringCase;
 import static org.hamcrest.Matchers.equalTo;
@@ -57,18 +57,5 @@ public class UserServiceTest {
                 .getMessage();
 
         assertThat(respondForAddingListOfUsers, is(containsStringIgnoringCase("ok")));
-    }
-
-    private User createUser() {
-        Random random = new Random();
-        return User.builder()
-                .username("username" + random.nextInt())
-                .firstName("firstName" + random.nextInt())
-                .lastName("lastName" + random.nextInt())
-                .email("email" + random.nextInt() + "@gmail.com")
-                .password("password" + random.nextInt())
-                .phone("phone" + random.nextInt())
-                .userStatus(random.nextInt())
-                .build();
     }
 }
