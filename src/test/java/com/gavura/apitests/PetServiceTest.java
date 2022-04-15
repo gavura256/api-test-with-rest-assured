@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.gavura.entity.Pet;
 import org.gavura.step.PetServiceSteps;
@@ -21,12 +22,12 @@ import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
-@Story("Pet service tests")
+@Feature("Pet service")
 public class PetServiceTest {
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
 
     @Test
-    @Feature("Create pet and verify whether created pet equals expected")
+    @Story("Create pet and verify whether created pet equals expected")
     @Severity(SeverityLevel.BLOCKER)
     public void createPetMethodShouldReturnCreatedPetTest() {
         Pet expectedPet = createPet();
@@ -36,7 +37,7 @@ public class PetServiceTest {
     }
 
     @Test
-    @Feature("Delete pet by id and verify whether pet with this id does not exist")
+    @Story("Delete pet by id and verify whether pet with this id does not exist")
     @Severity(SeverityLevel.CRITICAL)
     public void deletePetByIdMethodShouldThrowsExceptionWhenPetIsNonexistent() {
         Pet expectedPet = createPet();
@@ -47,7 +48,7 @@ public class PetServiceTest {
     }
 
     @Test
-    @Feature("Get pet by id and verify whether actual pet equals to expected")
+    @Story("Get pet by id and verify whether actual pet equals to expected")
     @Severity(SeverityLevel.BLOCKER)
     public void getPetByIdMethodShouldReturnPetWhenMakeRequestTest() {
         Pet expectedPet = createPet();
@@ -58,7 +59,7 @@ public class PetServiceTest {
     }
 
     @Test
-    @Feature("Update pet and verify whether request return valid update pet")
+    @Story("Update pet and verify whether request return valid update pet")
     @Severity(SeverityLevel.BLOCKER)
     public void updatePetMethodShouldReturnUpdatedPetTest() {
         Pet expectedPet = createPet();
@@ -69,7 +70,7 @@ public class PetServiceTest {
     }
 
     @Test
-    @Feature("Find pet by status and verify whether method return only pets with expected status")
+    @Story("Find pet by status and verify whether method return only pets with expected status")
     @Severity(SeverityLevel.BLOCKER)
     public void findPetByStatusMethodShouldReturnOnlyPetsWithExpectedStatusTest() {
         String expectedStatus = "available";
@@ -82,7 +83,7 @@ public class PetServiceTest {
     }
 
     @Test
-    @Feature("Upload pet image and verify whether method doesn't return exception message")
+    @Story("Upload pet image and verify whether method doesn't return exception message")
     @Severity(SeverityLevel.BLOCKER)
     public void uploadPetImageMethodShouldNotReturnExceptionMessageTest() {
         String exceptionMessage = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
