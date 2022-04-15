@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
@@ -25,6 +26,7 @@ public class StoreServiceTest {
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
+    @Step("Get storeInventory and verify that response body matches json scheme")
     public void getStoreInventoryAndVeryFyThatResponseBodyMatchesJsonSchemeTest() {
         File inventoryResponseSchema = new File(INVENTORY_SCHEMA_JSON);
         String inventoryResponse = StoreServiceSteps.getInventory();
