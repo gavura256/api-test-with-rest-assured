@@ -4,7 +4,6 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
@@ -19,14 +18,13 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
-@Feature("Store service API test")
 public class StoreServiceTest {
     private static final String INVENTORY_SCHEMA_JSON = "src/test/resources/inventorySchema.json";
     private static final String STORE_ORDER_SCHEMA = "src/test/resources/storeOrderSchema.json";
 
     @Test
+    @Feature("GET store inventory")
     @Severity(SeverityLevel.BLOCKER)
-    @Step("Get storeInventory and verify that response body matches json scheme")
     public void getStoreInventoryAndVeryFyThatResponseBodyMatchesJsonSchemeTest() {
         File inventoryResponseSchema = new File(INVENTORY_SCHEMA_JSON);
         String inventoryResponse = StoreServiceSteps.getInventory();
@@ -35,6 +33,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Feature("POST store order")
     @Severity(SeverityLevel.BLOCKER)
     public void placeAnOrderForAPetAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
@@ -44,6 +43,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Feature("GET store order by id")
     @Severity(SeverityLevel.BLOCKER)
     public void findPurchaseOrderByIdAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
@@ -56,6 +56,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Feature("DELETE order by id ")
     @Severity(SeverityLevel.BLOCKER)
     public void deletePurchaseOrderByIdAndVerifyThatAfterDeletingOrderDoesNotExistTest() {
         Store expectedStore = createStore();
