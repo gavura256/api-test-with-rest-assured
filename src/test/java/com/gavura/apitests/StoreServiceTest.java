@@ -2,6 +2,8 @@ package com.gavura.apitests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
@@ -22,6 +24,7 @@ public class StoreServiceTest {
     private static final String STORE_ORDER_SCHEMA = "src/test/resources/storeOrderSchema.json";
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void getStoreInventoryAndVeryFyThatResponseBodyMatchesJsonSchemeTest() {
         File inventoryResponseSchema = new File(INVENTORY_SCHEMA_JSON);
         String inventoryResponse = StoreServiceSteps.getInventory();
@@ -30,6 +33,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void placeAnOrderForAPetAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
         String actualStore = StoreServiceSteps.postStore(createStore());
@@ -38,6 +42,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void findPurchaseOrderByIdAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
         String expectedStoreOrder = StoreServiceSteps.postStore(createStore());
@@ -49,6 +54,7 @@ public class StoreServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void deletePurchaseOrderByIdAndVerifyThatAfterDeletingOrderDoesNotExistTest() {
         Store expectedStore = createStore();
         StoreServiceSteps.postStore(expectedStore);

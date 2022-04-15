@@ -2,6 +2,8 @@ package com.gavura.apitests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;
 import org.testng.annotations.Test;
@@ -20,6 +22,7 @@ import static org.hamcrest.Matchers.is;
 @Feature("User service API test")
 public class UserServiceTest {
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
@@ -29,6 +32,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void deleteUserAndVerifyWhetherResponseBodyContainsDeletedUserNameTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
@@ -39,6 +43,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void updateUserAndVerifyWhetherUpdatedUserIsAsExpectedTest() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
@@ -50,6 +55,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void createUsersWithListAndVerifyWhetherResponseBodyMessageContainsOkTest() {
         List<User> list = new ArrayList<>();
         IntStream.range(0, 10).forEach(iteration -> list.add(createUser()));

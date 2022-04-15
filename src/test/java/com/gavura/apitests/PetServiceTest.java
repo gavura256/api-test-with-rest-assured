@@ -2,6 +2,8 @@ package com.gavura.apitests;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.gavura.entity.Pet;
 import org.gavura.step.PetServiceSteps;
 import org.testng.annotations.Test;
@@ -24,6 +26,7 @@ public class PetServiceTest {
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void createPetAndVerifyWhetherCreatedPetIsTheSameAsExpectedTest() {
         Pet expectedPet = createPet();
         Pet actualPet = PetServiceSteps.createPet(expectedPet);
@@ -32,6 +35,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExistTest() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet)
@@ -42,6 +46,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void getPetByIdAndVerifyWhetherActualPetEqualsToExpectedPetTest() {
         Pet expectedPet = createPet();
         Long actualPetId = PetServiceSteps.createPet(expectedPet)
@@ -52,6 +57,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void updatePetAndVerifyWhetherRequestReturnValidUpdatedPetTest() {
         Pet expectedPet = createPet();
         PetServiceSteps.createPet(expectedPet);
@@ -61,6 +67,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void verifyThatFindPetByStatusRequestReturnsOnlyPetsWithExpectedStatusTest() {
         String expectedStatus = "available";
         List<String> actualStatuses = PetServiceSteps.getPetsByStatus(expectedStatus)
@@ -72,6 +79,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void uploadPetImageAndVerifyThatResponseMessageDoesNotContainExceptionTextTest() {
         File imageToUpload = new File(DOG_IMAGE_PATH);
         Pet expectedPet = createPet();
