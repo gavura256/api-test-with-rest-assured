@@ -4,7 +4,6 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.gavura.entity.Pet;
 import org.gavura.step.PetServiceSteps;
@@ -22,7 +21,7 @@ import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
-@Feature("Pet service")
+@Feature("Test pet service")
 public class PetServiceTest {
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
 
