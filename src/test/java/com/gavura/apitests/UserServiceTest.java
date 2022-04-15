@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;
 import org.testng.annotations.Test;
@@ -19,9 +20,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @Epic("REST API Regression Testing using TestNG")
-@Feature("User service API test")
+@Story("User service tests")
 public class UserServiceTest {
     @Test
+    @Feature("CREATE user")
     @Severity(SeverityLevel.BLOCKER)
     public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
         User expectedUser = createUser();
@@ -32,6 +34,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Feature("DELETE user")
     @Severity(SeverityLevel.BLOCKER)
     public void deleteUserAndVerifyWhetherResponseBodyContainsDeletedUserNameTest() {
         User expectedUser = createUser();
@@ -43,6 +46,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Feature("UPDATE user")
     @Severity(SeverityLevel.BLOCKER)
     public void updateUserAndVerifyWhetherUpdatedUserIsAsExpectedTest() {
         User expectedUser = createUser();
@@ -55,6 +59,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Feature("CREATE users from list")
     @Severity(SeverityLevel.BLOCKER)
     public void createUsersWithListAndVerifyWhetherResponseBodyMessageContainsOkTest() {
         List<User> list = new ArrayList<>();

@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
 import org.gavura.utility.ConvertHelper;
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
+@Story("Store service tests")
 public class StoreServiceTest {
     private static final String INVENTORY_SCHEMA_JSON = "src/test/resources/inventorySchema.json";
     private static final String STORE_ORDER_SCHEMA = "src/test/resources/storeOrderSchema.json";

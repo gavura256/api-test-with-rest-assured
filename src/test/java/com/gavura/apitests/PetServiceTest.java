@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.gavura.entity.Pet;
 import org.gavura.step.PetServiceSteps;
 import org.testng.annotations.Test;
@@ -20,12 +21,13 @@ import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
-@Feature("Pet service API test")
+@Story("Pet service tests")
 public class PetServiceTest {
     public static final String EXCEPTION_MISSING_START_BOUNDARY = "org.jvnet.mimepull.MIMEParsingException: Missing start boundary";
     public static final String DOG_IMAGE_PATH = "src/test/resources/dogimage.jpg";
 
     @Test
+    @Feature("CREATE pet")
     @Severity(SeverityLevel.BLOCKER)
     public void createPetAndVerifyWhetherCreatedPetIsTheSameAsExpectedTest() {
         Pet expectedPet = createPet();
@@ -35,6 +37,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Feature("DELETE pet")
     @Severity(SeverityLevel.BLOCKER)
     public void deletePetAndVerifyWhetherPetWithThisIdDoesNotExistTest() {
         Pet expectedPet = createPet();
@@ -46,6 +49,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Feature("GET pet by id")
     @Severity(SeverityLevel.BLOCKER)
     public void getPetByIdAndVerifyWhetherActualPetEqualsToExpectedPetTest() {
         Pet expectedPet = createPet();
@@ -57,6 +61,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Feature("UPDATE pet")
     @Severity(SeverityLevel.BLOCKER)
     public void updatePetAndVerifyWhetherRequestReturnValidUpdatedPetTest() {
         Pet expectedPet = createPet();
@@ -67,6 +72,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Feature("GET pet by status")
     @Severity(SeverityLevel.BLOCKER)
     public void verifyThatFindPetByStatusRequestReturnsOnlyPetsWithExpectedStatusTest() {
         String expectedStatus = "available";
@@ -79,6 +85,7 @@ public class PetServiceTest {
     }
 
     @Test
+    @Feature("UPDATE pet image")
     @Severity(SeverityLevel.BLOCKER)
     public void uploadPetImageAndVerifyThatResponseMessageDoesNotContainExceptionTextTest() {
         File imageToUpload = new File(DOG_IMAGE_PATH);
