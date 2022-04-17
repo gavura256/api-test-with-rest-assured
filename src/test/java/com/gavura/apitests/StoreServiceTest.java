@@ -1,9 +1,11 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.gavura.entity.Store;
 import org.gavura.step.StoreServiceSteps;
@@ -19,15 +21,16 @@ import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertThrows;
 
 @Epic("REST API Regression Testing using TestNG")
-@Story("Store service tests")
+@Feature("Test pet service")
 public class StoreServiceTest {
     private static final String INVENTORY_SCHEMA_JSON = "src/test/resources/inventorySchema.json";
     private static final String STORE_ORDER_SCHEMA = "src/test/resources/storeOrderSchema.json";
 
     @Test
-    @Feature("GET store inventory")
+    @Step("Get store inventory and verify that response body matches json schema")
+    @Description("Returns a map of status codes to quantities")
     @Severity(SeverityLevel.BLOCKER)
-    public void getStoreInventoryAndVeryFyThatResponseBodyMatchesJsonSchemeTest() {
+    public void getStoreInventoryMethodShouldReturnAMapOfStatusCodesToQuantitiesTest() {
         File inventoryResponseSchema = new File(INVENTORY_SCHEMA_JSON);
         String inventoryResponse = StoreServiceSteps.getInventory();
 
@@ -35,9 +38,9 @@ public class StoreServiceTest {
     }
 
     @Test
-    @Feature("POST store order")
+    @Step("Place purchase order for a pet and verify that response json matches validate json schema")
     @Severity(SeverityLevel.BLOCKER)
-    public void placeAnOrderForAPetAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
+    public void postStoreMethodShouldReturnJsonWithValidDataTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
         String actualStore = StoreServiceSteps.postStore(createStore());
 
@@ -45,9 +48,11 @@ public class StoreServiceTest {
     }
 
     @Test
-    @Feature("GET store order by id")
+    @Step("Find purchase order by id and verify that response json matches validate json schema test")
+    @Description("For valid response try integer IDs with positive integer value. " +
+            "Negative or non-integer values will generate API errors")
     @Severity(SeverityLevel.BLOCKER)
-    public void findPurchaseOrderByIdAndVerifyThatResponseJsonMatchesValidateJsonSchemaTest() {
+    public void getOrderByIdShouldReturnStoreOrderTest() {
         File storeOrderSchema = new File(STORE_ORDER_SCHEMA);
         String expectedStoreOrder = StoreServiceSteps.postStore(createStore());
         Long expectedStoreOrderId = ConvertHelper.convertStringToPojoStoreClass(expectedStoreOrder)
@@ -58,13 +63,15 @@ public class StoreServiceTest {
     }
 
     @Test
-    @Feature("DELETE order by id ")
+    @Step("Delete purchase order by id and verify that after deleting the order does not exist")
+    @Description("For valid response try integer IDs with positive integer value. " +
+            "Negative or non-integer values will generate API errors")
     @Severity(SeverityLevel.BLOCKER)
-    public void deletePurchaseOrderByIdAndVerifyThatAfterDeletingOrderDoesNotExistTest() {
-        Store expectedStore = createStore();
-        StoreServiceSteps.postStore(expectedStore);
-        StoreServiceSteps.deleteStoreById(expectedStore.getId());
+    public void deleteOrderByIdShouldThrowsExceptionWhenOrderDoesNotExistTest() {
+        Store expectedOrder = createStore();
+        StoreServiceSteps.postStore(expectedOrder);
+        StoreServiceSteps.deleteOrderById(expectedOrder.getId());
 
-        assertThrows(() -> StoreServiceSteps.getOrderById(expectedStore.getId()));
+        assertThrows(() -> StoreServiceSteps.getOrderById(expectedOrder.getId()));
     }
 }
