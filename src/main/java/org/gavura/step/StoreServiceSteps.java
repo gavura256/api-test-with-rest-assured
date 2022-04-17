@@ -31,7 +31,7 @@ public class StoreServiceSteps {
                 .asPrettyString();
     }
 
-    public static ApiResponse deleteStoreById(Long id) {
+    public static ApiResponse deleteOrderById(Long id) {
         return STORE_SERVICE.deleteRequest(STORE_ORDER_BY_ID, id)
                 .as(ApiResponse.class);
     }
