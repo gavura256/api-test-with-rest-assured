@@ -1,10 +1,10 @@
 package com.gavura.apitests;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
 import org.gavura.entity.User;
 import org.gavura.step.UserServiceSteps;
 import org.testng.annotations.Test;
@@ -20,12 +20,20 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 @Epic("REST API Regression Testing using TestNG")
-@Story("User service tests")
+@Feature("User service tests")
 public class UserServiceTest {
     @Test
-    @Feature("CREATE user")
+    @Description("Create user method should not throw any exceptions")
     @Severity(SeverityLevel.BLOCKER)
-    public void createUserAndVerifyWhetherCreatedUserEqualsExpectedTest() {
+    public void testCreateUserMethodShouldNotThrowsAnyExceptions() {
+        User expectedUser = createUser();
+        UserServiceSteps.createUser(expectedUser);
+    }
+
+    @Test
+    @Description("Create user and verify whether created user equals expected")
+    @Severity(SeverityLevel.BLOCKER)
+    public void testGetUserByNameMethodShouldReturnUserAsExpected() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         User createdUser = UserServiceSteps.getUserByName(expectedUser.getUsername());
@@ -34,9 +42,9 @@ public class UserServiceTest {
     }
 
     @Test
-    @Feature("DELETE user")
+    @Description("Delete user and verify whether response body contains deleted user name")
     @Severity(SeverityLevel.BLOCKER)
-    public void deleteUserAndVerifyWhetherResponseBodyContainsDeletedUserNameTest() {
+    public void testDeleteUserByUserNameMethodShouldReturnUserName() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         String deletedUserName = UserServiceSteps.deleteUserByUserName(expectedUser.getUsername())
@@ -46,9 +54,9 @@ public class UserServiceTest {
     }
 
     @Test
-    @Feature("UPDATE user")
+    @Description("Update user and verify whether updated user is as expected")
     @Severity(SeverityLevel.BLOCKER)
-    public void updateUserAndVerifyWhetherUpdatedUserIsAsExpectedTest() {
+    public void testUpdateUserByUserNameMethodShouldPutUserIntoRightPlace() {
         User expectedUser = createUser();
         UserServiceSteps.createUser(expectedUser);
         User updatedUser = createUser();
@@ -59,14 +67,13 @@ public class UserServiceTest {
     }
 
     @Test
-    @Feature("CREATE users from list")
+    @Description("Create users with list and verify whether response body message contains 'ok'")
     @Severity(SeverityLevel.BLOCKER)
-    public void createUsersWithListAndVerifyWhetherResponseBodyMessageContainsOkTest() {
+    public void createUsersWithListMethodShouldReturnOkInMessageField() {
         List<User> list = new ArrayList<>();
         IntStream.range(0, 10).forEach(iteration -> list.add(createUser()));
-        String respondForAddingListOfUsers = UserServiceSteps.createUsersWithList(list)
-                .getMessage();
+        String message = UserServiceSteps.createUsersWithList(list).getMessage();
 
-        assertThat(respondForAddingListOfUsers, is(containsStringIgnoringCase("ok")));
+        assertThat(message, is(containsStringIgnoringCase("ok")));
     }
 }
